@@ -1,5 +1,5 @@
 <?php
-	// Define des chemins du projet
+	// Defines des chemins du projet
 	define ("PATH_CURRENT", "./" );
 	define ("PATH_CONFIGS", PATH_CURRENT . "configs/");
 	define ("PATH_LIBS", PATH_CURRENT . "libs/" );
@@ -15,8 +15,6 @@
 	require_once(PATH_LIBS."simpleNeuralNetwork.class.php");
 
 	
-	$timestart = microtime();
-
 	
 	$brain = new SNN();
 //	$brain->create(20,20,10);
@@ -35,10 +33,6 @@
 	var_dump($brain);
 
 
-//	e ( $v );
-	// $timeend = microtime();
-	// e ($timeend - $timestart . " micro secondes");
-	
 	//var_dump($brain);
 
 
