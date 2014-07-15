@@ -82,11 +82,25 @@ class SimpleNeuralNetwork {
 		return $signalErreur;
 	}
 	
-	//
+	// Methode permettant de recalculer la premiere couche de connections
+	// Couche de sortie
+	// R => Z => Zn*dn
 	public function recalcLastWeights($signalE) {
 	
+		$nbLayers = count($this->w);
+		$nbOutNeurons = count($this->w[$nbLayers - 1]);
 	
+		$nbConnections = $this->w[$nbLayers - 1][$nbOutNeurons - 1];
 	
+		$i = 0;
+		while($i < $nbOutNeurons) {
+			$j = 0;
+			while ($j < $nbConnections) {
+				$this->w[$nbLayers - 1][$i][$j] *= $signalE[$j];
+				$j++;
+			}		
+			$i++;
+		}
 	}
 	
 	
