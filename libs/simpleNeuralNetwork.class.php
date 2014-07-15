@@ -82,14 +82,13 @@ class SimpleNeuralNetwork {
 		return $signalErreur;
 	}
 	
+	
 	// Methode permettant de recalculer la premiere couche de connections
 	// Couche de sortie
 	// R => Z => Zn*dn
 	public function recalcLastWeights($signalE) {
-	
 		$nbLayers = count($this->w);
 		$nbOutNeurons = count($this->w[$nbLayers - 1]);
-	
 		$nbConnections = $this->w[$nbLayers - 1][$nbOutNeurons - 1];
 	
 		$i = 0;
@@ -101,6 +100,44 @@ class SimpleNeuralNetwork {
 			}		
 			$i++;
 		}
+	}
+	
+	
+	// méthode permettant de déterminer l'erreur entre la Couche+1 d'un réseau de neurone 
+	// et le résultat attendu
+	// formule e = voulu - obtenu
+	public function calculErreurCoucheOther($wanted, $n) {
+		
+		$nbLayers = count($this->w);
+		$nbOutNeurons = count($this->w[$n]);
+		$vect1 = $this->build1Vect($nbOutNeurons);
+
+		$ret = array();
+		$i = 0;
+		while($i < 	$nbOutNeurons) {	
+			$ret[$i] = $this->matrixArrMult($this->w[$n+1][$i], $vect1);
+			$i++;
+		}	
+		
+		return $ret;
+		
+	}
+	
+	// d2 = h * (1 - h) * f;
+	public function calculSignalErreurCoucheOther($e, $h, $n) {
+		$nbLayers = count($this->w);
+		$nbOutNeurons = count($this->w[$n]);
+		$vect1 = $this->build1Vect($nbOutNeurons);
+		$unmoins = $this->matrixArrSoustract($vect1, $h);
+		$omultunmoinso = $this->matrixArrMult($unmoins, $h);
+		$signalErreur = $this->matrixArrMult($omultunmoinso, $e);
+		return $signalErreur;
+	}
+	
+	
+	
+	public function recalcOthersWeights($signalE) {
+		
 	}
 	
 	
