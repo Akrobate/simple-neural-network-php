@@ -106,7 +106,7 @@ class SimpleNeuralNetwork {
 	// méthode permettant de déterminer l'erreur entre la Couche+1 d'un réseau de neurone 
 	// et le résultat attendu
 	// formule e = voulu - obtenu
-	public function calculErreurCoucheOther($wanted, $n) {
+	public function calculErreurCoucheOther($n) {
 		
 		$nbLayers = count($this->w);
 		$nbOutNeurons = count($this->w[$n]);
@@ -135,18 +135,43 @@ class SimpleNeuralNetwork {
 	}
 	
 	
-	
-	public function recalcOthersWeights($signalE) {
+	// w = w + d2 * xT (entrée ou heuristique couche avant)
+	public function recalcOthersWeights($signalE, $n) {
+		$nbLayers = count($this->w);
+		$nbOutNeurons = count($this->w[$n]);
+
+		$multVect = array();
+		$i = 0;
+		
+		$arr = array();
+		
+		while($i < $nbOutNeurons) {
+			$multVect[$i] = $this->matrixArrMult($this->build1Vect($nb, $signalE[$i]), $this->h[$n]));
+			$i ++;
+		}
+		
+		$i = 0;
+		
+		
+		// endev 
+		/*
+		$arr = array();
+		
+		while($i < $nbOutNeurons) {
+			$multVect[$i] = $this->matrixArrMult($this->build1Vect($nb, $signalE[$i]), $this->h[$n]));
+			$i ++;
+		}
+		*/
 		
 	}
 	
 	
 	// fabrique un array rempli de 1 de dimention $nb
-	private function build1Vect($nb) {
+	private function build1Vect($nb, $value = 1) {
 		$i = 0;
 		$ret = array();
 		while ($i < $nb) {
-			$ret[$i] =  1;
+			$ret[$i] =  $value;
 			$i++;
 		}
 		return $ret;
