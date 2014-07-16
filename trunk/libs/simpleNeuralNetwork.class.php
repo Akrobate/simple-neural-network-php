@@ -146,7 +146,7 @@ class SimpleNeuralNetwork {
 		$arr = array();
 		
 		while($i < $nbOutNeurons) {
-			$multVect[$i] = $this->matrixArrMult($this->build1Vect(count($this->h[$n]), $signalE[$i]), $this->h[$n]));
+			$multVect[$i] = $this->matrixArrMult($this->build1Vect(count($this->h[$n]), $signalE[$i]), $this->h[$n]);
 			$i ++;
 		}
 		
