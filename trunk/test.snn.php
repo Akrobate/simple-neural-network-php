@@ -30,6 +30,13 @@
 	$brain->initWDemo();
 	$brain->setEntry(array(1,2,3));
 	$brain->calcH();
+	
+	// xT reponse attendue - variable $wanted
+	$wanted = array(0.1, 0.3, 0.7);
+	// test error out
+	$e = $brain->calculErreurCoucheSortie($wanted);
+	
+	var_dump($e);
 	var_dump($brain);
 
 
