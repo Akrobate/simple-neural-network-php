@@ -1,0 +1,1 @@
+Classe php pour créer des réseaux de neurones multicouches en PHP
